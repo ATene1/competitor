@@ -1,0 +1,132 @@
+package src;
+
+import static java.lang.System.out;
+import java.io.*;
+import java.util.*; 
+
+/**
+ * @author armandtene
+ *
+ */
+
+
+  public class CompetitorList
+  
+  
+  { 
+	  
+	  public static ArrayList<Competitor> competitors;
+		
+		public CompetitorList() 
+		{
+			competitors = new ArrayList<Competitor>();
+		}
+		
+		public static void add(Competitor competitor) 
+		{
+			competitors.add(competitor);
+			System.out.println( competitors);
+			
+		}
+		
+		
+		// Method
+		
+		// Reader
+	
+		public static class Scanner4 
+		{	
+		  public static void main(String[] args) throws FileNotFoundException
+		  {
+		  ArrayList<String> arr = new ArrayList<String>();
+	      try (BufferedReader br = new BufferedReader(new FileReader("CompetitorList.csv")))
+	      {
+
+	          String sCurrentLine;
+
+	          while ((sCurrentLine = br.readLine()) != null) {
+	              arr.add(sCurrentLine);
+	              
+	              
+	              
+	              System.out.println( );
+	              
+	              
+	           // Splitting the line by item
+	           
+					
+					String[] str = sCurrentLine.split(",");
+					
+		// i couldn't figure what to do in this part
+					
+				/*	Scanner fromStr = new Scanner(str);
+					
+					
+					while(fromStr.hasNext())
+						
+					{
+						System.out.println(fromStr.next());
+					}*/
+					
+				br.close();	
+	          }
+	          
+	      } 
+	      
+	      catch (IOException e) 
+	      {
+	          e.printStackTrace();   
+	      } 
+	     
+	    }		
+		
+		public static void print1() 
+		{
+			System.out.println();
+
+			for (int i=0; i < competitors.size(); i++) 
+			{
+				competitors.get(i);
+				System.out.printf("%d : %s \n", i + 1, Competitor.getCompetitor());
+			}
+			
+		}
+		public static void print2() 
+		{
+			System.out.println();
+			for(Competitor competitor : competitors) 
+			{
+				System.out.printf("%s \n", Competitor.getCompetitor());
+			}
+			System.out.println( competitors);
+			
+			
+		}			
+                   //Creating an writer object
+		
+		public static void printToCSVFile(String filename) throws IOException {
+
+			FileWriter fw = new FileWriter (filename);
+			
+			// write information for each Competitor
+			
+			for(Competitor competitor : CompetitorList.competitors) 
+			{
+				fw.write(String.format("%s,%s", Competitor.getName(),Competitor.getlevel(), Competitor.getage()));
+				
+				// write all Competitors
+				
+				for(int i = 0; i < 4; i++ ) 
+				{
+					fw.write("," + Competitor.OverallScore);
+				}
+				
+				fw.write("\n");
+			}
+			
+			// closing the writer
+			
+			fw.close();
+			
+			}
+		}}
